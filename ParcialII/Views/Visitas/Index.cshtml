@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ParcialII.Models.Visitas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.date_vis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bg_vis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end_vis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vis_motive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_vis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bg_vis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.end_vis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vis_motive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.VisitaID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.VisitaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VisitaID })
+        </td>
+    </tr>
+}
+
+</table>
