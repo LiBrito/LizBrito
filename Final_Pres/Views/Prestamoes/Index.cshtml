@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Final_Pres.Models.Prestamo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Desembolso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avances)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaysPerYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PagosAdicionales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroDePagos_p)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroDePagos_r)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InteresRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PagosAnticipados)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Years)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desembolso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Avances)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaysPerYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PagosAdicionales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroDePagos_p)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroDePagos_r)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InteresRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PagosAnticipados)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Years)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PresID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PresID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PresID })
+        </td>
+    </tr>
+}
+
+</table>

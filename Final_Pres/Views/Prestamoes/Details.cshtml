@@ -1,0 +1,171 @@
+﻿@model Final_Pres.Models.Prestamo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Prestamo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Desembolso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Desembolso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avances)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avances)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaysPerYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaysPerYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PagosAdicionales)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PagosAdicionales)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDePagos_p)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDePagos_p)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDePagos_r)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDePagos_r)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InteresRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InteresRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PagosAnticipados)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PagosAnticipados)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Years)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Years)
+        </dd>
+
+    </dl>
+</div>
+<h1>Tabla de Amortización</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>No</td>
+            <td>Cuota</td>
+            <td>Interes Mensual</td>
+            <td>Capital Mensual</td>
+            <td>Balance</td>
+            <td>Interes Acumulado</td>
+            <td>Avances</td>
+
+
+        </tr>
+    </thead>
+    @{ 
+        double capital = Convert.ToDouble(Model.Desembolso);
+        double interes = Convert.ToDouble(Model.InteresRate)/100;
+        double plazo = Model.NumeroDePagos_p;
+
+        double cuota = capital * (interes / (double)(1 - Math.Pow(1 + (double)interes, -plazo)));
+
+        double interes_mensual = 0;
+
+        double Interes_Acumulado = 0;
+        double capital_pagado = 0;
+        double avances = 0;
+
+        int i = 1;
+
+        for (i = 1; i <= plazo; i++)
+        {
+            interes_mensual = Math.Round((interes * capital), 2);
+            Interes_Acumulado += interes_mensual;
+            capital = Math.Round((capital - cuota + interes_mensual), 2);
+            capital_pagado = Math.Round((cuota - interes_mensual), 2);
+
+            <tbody>
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @Math.Round(cuota, MidpointRounding.AwayFromZero)
+                        </td>
+                        <td>
+                            @Math.Round(interes_mensual, MidpointRounding.AwayFromZero)
+                        </td>
+                        <td>
+                            @Math.Round(capital_pagado, MidpointRounding.AwayFromZero)
+                        </td>
+                        <td>
+                            @Math.Round(capital, MidpointRounding.AwayFromZero)
+                        </td>
+                        <td>
+                            @Math.Round(Interes_Acumulado, MidpointRounding.AwayFromZero)
+                        </td>
+                        <td>
+                            @Math.Round(avances, MidpointRounding.AwayFromZero)
+                        </td>
+                    </tr>
+            </tbody>
+        }
+    }
+</table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PresID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
